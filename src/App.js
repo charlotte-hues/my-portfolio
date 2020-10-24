@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./shared/components/header";
 
 import { Canvas, useFrame } from "react-three-fiber";
-import { softShadows } from "drei";
+import { softShadows, MeshDistortMaterial } from "drei";
 
 softShadows();
 
