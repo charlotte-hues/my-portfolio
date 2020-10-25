@@ -4,10 +4,10 @@ const Header = () => {
   return (
     <header>
       <div className="navText">
-        <span>REACT THREE FIBER</span>
+        <span>CHARLOTTE HUES</span>
       </div>
       <div className="navText">
-        <span>EP. 1</span>
+        <span>MENU</span>
       </div>
     </header>
   );
