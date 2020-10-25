@@ -15,20 +15,26 @@ const StyledStaticButton = styled.button`
     vertical-align: middle;
     line-height: 80px;
 
-    background-color: #f1f4f8;
+    background-color: rgba(255,255,255,0);
     color: black;
     cursor: pointer;
     border: 4px solid black;    
     border-radius: 100%;
+    transition: all 0.2s ease;
     
     &:hover {
-        background-color: grey;
+        background-color: rgba(255,255,255,0.2);
+        transition: all 0.2s ease;
     }
   }
 `;
 
 const StaticButton = props => {
-  return <StyledStaticButton>{props.children}</StyledStaticButton>;
+  return (
+    <StyledStaticButton bkgdColor={props.color}>
+      {props.children}
+    </StyledStaticButton>
+  );
 };
 
 export default StaticButton;
