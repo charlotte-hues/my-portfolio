@@ -5,6 +5,7 @@ import { useThree } from "react-three-fiber";
 const Scene = ({ top }) => {
   const { size } = useThree();
   const scrollMax = size.height * 4.5;
+
   return (
     <>
       <Background

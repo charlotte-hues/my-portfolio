@@ -6,7 +6,8 @@ import "./App.css";
 import Header from "./shared/components/navigation/header";
 import Footer from "./shared/components/navigation/footer";
 import Scene from "./shared/scene/scene";
-import { useSpring } from "react-spring/three";
+import { useSpring as useSpringThree } from "react-spring/three";
+import { useSpring } from "react-spring";
 
 // const number = 35;
 // const colors = ["#6D757B", "#727287", "#7A8D91", "#7A8191", "yellow", "orange"];
@@ -30,8 +31,14 @@ const ScrollContainer = styled.div`
 `;
 
 const App = () => {
-  const [{ top }, set] = useSpring(() => ({ top: 0 }));
-  const onScroll = useCallback(e => set({ top: e.target.scrollTop }), [set]);
+  const [{ top }, setThree] = useSpringThree(() => ({ top: 0 }));
+  const [{ scrollTop }, set] = useSpring(() => ({ scrollTop: 0 }));
+  const onScroll = e => {
+    setThree({ top: e.target.scrollTop });
+    set({ scrollTop: e.target.scrollTop });
+
+    console.log(e.target.scrollTop);
+  };
 
   return (
     <>
@@ -42,7 +49,7 @@ const App = () => {
         <div style={{ height: "500vh" }} />
       </ScrollContainer>
       <Header />
-      <Footer />
+      <Footer top={scrollTop} />
     </>
   );
 };
