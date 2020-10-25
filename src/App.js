@@ -48,6 +48,8 @@ const Content = () => {
   ));
 };
 
+//Original
+
 // const SpinningCube = ({ position, color, args }) => {
 //   const mesh = useRef(null);
 //   useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
