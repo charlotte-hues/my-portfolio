@@ -1,22 +1,63 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import "./App.css";
+import * as THREE from "three";
+import { useSprings, a } from "react-spring/three";
 import Header from "./shared/components/header";
 
 import { Canvas, useFrame } from "react-three-fiber";
-import { softShadows, MeshDistortMaterial } from "drei";
+// import { softShadows, MeshWobbleMaterial } from "drei";
 
-softShadows();
+// softShadows();
 
-const SpinningCube = ({ position, color, args }) => {
-  const mesh = useRef(null);
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
-  return (
-    <mesh castShadow ref={mesh} position={position}>
-      <boxBufferGeometry attach="geometry" args={args} />
-      <meshStandardMaterial attach="material" color={color} />
-    </mesh>
-  );
+const number = 35;
+const colors = ["#6D757B", "#727287", "#7A8D91", "#7A8191", "yellow", "orange"];
+
+const random = i => {
+  const r = Math.random();
+  return {
+    position: [100 - Math.random() * 200, 100 - Math.random() * 200, i * 1.5],
+    color: colors[Math.round(Math.random() * (colors.length - 1))],
+    scale: [1 + r * 14, 1 + r * 14, 1],
+    rotation: [0, 0, THREE.Math.degToRad(Math.round(Math.random()) * 45)]
+  };
 };
+
+const data = new Array(number).fill().map(() => {
+  return {
+    color: colors[Math.round(Math.random() * colors.length - 1)],
+    args: [0.1 + Math.random() * 9, 0.1 + Math.random() * 9, 10]
+  };
+});
+
+const Content = () => {
+  const [springs, set] = useSprings(number, i => ({
+    from: random(i),
+    ...random(i),
+    config: { mass: 20, tension: 150, friction: 50 }
+  }));
+  useEffect(
+    () =>
+      void setInterval(() => set(i => ({ ...random(i), delay: i * 40 })), 3000),
+    []
+  );
+  return data.map((d, index) => (
+    <a.mesh key={index} {...springs[index]} position={random(index).position}>
+      <boxBufferGeometry attach="geometry" args={d.args} />
+      <meshStandardMaterial attach="material" color={d.color} />
+    </a.mesh>
+  ));
+};
+
+// const SpinningCube = ({ position, color, args }) => {
+//   const mesh = useRef(null);
+//   useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
+//   return (
+//     <mesh castShadow ref={mesh} position={position}>
+//       <boxBufferGeometry attach="geometry" args={args} />
+//       <meshStandardMaterial attach="material" color={color} />
+//     </mesh>
+//   );
+// };
 
 const Lighting = () => {
   return (
@@ -36,13 +77,15 @@ const App = () => {
       <Canvas
         colorManagement
         shadowMap
-        camera={{ position: [-5, 2, 10], fov: 60 }}
+        camera={{ position: [0, 0, 100], fov: 100 }}
       >
         <Lighting />
 
-        <SpinningCube args={[2, 2, 1]} position={[2, 0, 0]} color="grey" />
+        <Content />
+
+        {/* <SpinningCube args={[2, 2, 1]} position={[2, 0, 0]} color="grey" />
         <SpinningCube args={[1, 1, 2]} position={[-2, 1, 0]} color="orange" />
-        <SpinningCube args={[1, 1, 0.1]} position={[0, 0, 0]} color="aqua" />
+        <SpinningCube args={[1, 1, 0.1]} position={[0, 0, 0]} color="aqua" /> */}
 
         <group>
           <mesh
