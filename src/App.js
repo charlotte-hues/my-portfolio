@@ -1,13 +1,15 @@
 import React, { useCallback } from "react";
 import { Canvas } from "react-three-fiber";
 import styled from "styled-components";
+import { useSpring as useSpringThree } from "react-spring/three";
+import { useSpring } from "react-spring";
 
 import "./App.css";
 import Header from "./shared/components/navigation/header";
 import Footer from "./shared/components/navigation/footer";
 import Scene from "./shared/scene/scene";
-import { useSpring as useSpringThree } from "react-spring/three";
-import { useSpring } from "react-spring";
+
+import IconsProjectContent from "./projects/pages/IconsProject/IconsProjectContent";
 
 // const number = 35;
 // const colors = ["#6D757B", "#727287", "#7A8D91", "#7A8191", "yellow", "orange"];
@@ -36,19 +38,21 @@ const App = () => {
   const onScroll = e => {
     setThree({ top: e.target.scrollTop });
     set({ scrollTop: e.target.scrollTop });
-
-    console.log(e.target.scrollTop);
   };
 
   return (
     <>
-      <Canvas className="canvas">
+      {/* <Canvas className="canvas">
         <Scene top={top} />
       </Canvas>
       <ScrollContainer onScroll={onScroll}>
         <div style={{ height: "500vh" }} />
-      </ScrollContainer>
+      </ScrollContainer> */}
       <Header />
+      <main>
+        <IconsProjectContent />
+      </main>
+
       <Footer top={scrollTop} />
     </>
   );

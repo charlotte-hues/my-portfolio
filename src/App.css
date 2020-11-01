@@ -48,6 +48,12 @@ footer {
   bottom: 0;
 }
 
+main {
+  width: 100%;
+  height: 100%;
+  padding: 108px 200px;
+}
+
 .navText {
   font-size: 1rem;
   font-weight: 700;
