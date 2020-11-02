@@ -1,27 +1,27 @@
 import React from "react";
-import { useSpring } from "react-spring";
+import { withRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
-import Header from "./shared/components/navigation/header";
-import Footer from "./shared/components/navigation/footer";
 
-import IconsProjectContent from "./projects/pages/IconsProject/IconsProjectContent";
+import Layout from "./hoc/Layout/Layout";
+import Home from "./sections/Home/Home";
+import Work from "./sections/Work/Work";
+import Project from "./sections/Project/Project";
 
 const App = () => {
-  const [{ scrollTop }, set] = useSpring(() => ({ scrollTop: 0 }));
-  const onScroll = e => {
-    set({ scrollTop: e.target.scrollTop });
-  };
+  let routes = (
+    <Switch>
+      <Route path="/work" exact component={Work} />
+      <Route path="/work/:project" component={Project} />
+      <Route path="/" component={Home} />
+    </Switch>
+  );
 
   return (
     <>
-      <Header />
-      <main onScroll={onScroll}>
-        <IconsProjectContent />
-      </main>
-      <Footer top={scrollTop} />
+      <Layout>{routes}</Layout>
     </>
   );
 };
 
-export default App;
+export default withRouter(App);

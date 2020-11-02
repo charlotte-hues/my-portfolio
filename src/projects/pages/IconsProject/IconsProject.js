@@ -1,5 +1,5 @@
 import React from "react";
-import * as LawIcons from "./lawIcons/lawIcons";
+import * as LawIcons from "./content/lawIcons";
 import styled from "styled-components";
 
 import ProjectCard from "../../components/ProjectCard";
@@ -35,13 +35,14 @@ const LawIconsList = iconsArr.map(Icon => {
   );
 });
 
-const IconsProjectContent = () => {
+const IconsProject = () => {
   return (
     <>
+      <IconSetContainer>{LawIconsList}</IconSetContainer>
       <IconSetContainer>{LawIconsList}</IconSetContainer>
       <IconSetContainer>{LawIconsList}</IconSetContainer>
     </>
   );
 };
 
-export default IconsProjectContent;
+export default IconsProject;
