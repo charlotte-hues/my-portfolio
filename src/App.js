@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import "./App.css";
 
@@ -11,9 +11,12 @@ import Project from "./sections/Project/Project";
 const App = () => {
   let routes = (
     <Switch>
-      <Route path="/work" exact component={Work} />
       <Route path="/work/:project" component={Project} />
-      <Route path="/" component={Home} />
+      <Route path="/work" component={Work} />
+      <Route path="/about" exact component={Home} />
+      <Route path="/contact" exact component={Home} />
+      <Route path="/" exact component={Home} />
+      <Redirect to="/" />
     </Switch>
   );
 

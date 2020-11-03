@@ -1,9 +1,11 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 
+const startPercent = "75%";
+
 const animationSpeed = css`
-  animation-duration: 0.3s;
-  animation-iteration-count: 2;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
   animation-direction: alternate;
 `;
 
@@ -33,32 +35,39 @@ const SVG = styled.svg.attrs({
 // SCALES
 
 const scalesRightAnim = keyframes`
-  to {
+0%, ${startPercent} {
+  transform: translateY(1px);
+}
+  100%  {
     transform: translateY(-2px);
 }
 `;
 const scalesLeftAnim = keyframes`
-  to {
+0%, ${startPercent} {
+  transform: translateY(-2px);
+}
+  100% {
     transform: translateY(1px);
 }
 `;
 const scalesTiltAnim = keyframes`
-  to {
+0%, ${startPercent} {
+  d: path("M5.16711 4.08997L13.0456 5.47915M18.9544 6.52112L26.8329 7.9103");
+}
+  100% {
       d: path("M5.16708 7.91006L13.0455 6.52087M18.9544 5.47903L26.8329 4.08984");
     }
 `;
 
 const ScalesSVG = styled(SVG)`
-  &:hover {
-    & .right {
-      animation-name: ${scalesRightAnim};
-    }
-    & .left {
-      animation-name: ${scalesLeftAnim};
-    }
-    & .tilt {
-      animation-name: ${scalesTiltAnim};
-    }
+  & .right {
+    animation-name: ${scalesRightAnim};
+  }
+  & .left {
+    animation-name: ${scalesLeftAnim};
+  }
+  & .tilt {
+    animation-name: ${scalesTiltAnim};
   }
 `;
 
@@ -88,12 +97,14 @@ export const Scales = props => {
 // BRIEFCASE
 
 const breifcaseAnim = keyframes`
-  to { d: path("M11 7H3.88278C3.37846 7 2.95306 7.37554 2.8905 7.87596L2 15H12L13 13H19L20 15H30L29.1095 7.87597C29.0469 7.37554 28.6215 7 28.1172 7H21M11 7L12.7236 3.55279C12.893 3.214 13.2393 3 13.618 3H18.382C18.7607 3 19.107 3.214 19.2764 3.55279L21 7M11 7H21  M4 19 L7 15 M28 19 L25 15" );
+0%, ${startPercent} { d: path("M11 9 H4 C3.44772 9 3 9.44772 3 10 L3 18 H13 L13 16 H19 L19 18 H29 L29 10 C29 9.44772 28.5523 9 28 9 H21
+M11 9 L12.7236 5.55279 C12.893 5.214 13.2393 5 13.618 5 H18.382 C18.7607 5 19.107 5.214 19.2764 5.55279 L21 9 M11 9 H21
+M4 19 L4 19 M28 19 L28 19")}
+  100% { d: path("M11 7H3.88278C3.37846 7 2.95306 7.37554 2.8905 7.87596L2 15H12L13 13H19L20 15H30L29.1095 7.87597C29.0469 7.37554 28.6215 7 28.1172 7H21M11 7L12.7236 3.55279C12.893 3.214 13.2393 3 13.618 3H18.382C18.7607 3 19.107 3.214 19.2764 3.55279L21 7M11 7H21  M4 19 L7 15 M28 19 L25 15" );
   }
 `;
 const BriefcaseSVG = styled(SVG)`
-  &:hover {
-    & .lid {
+  & .lid {
       animation-name: ${breifcaseAnim};
     }
   }
@@ -118,7 +129,10 @@ M4 19 L4 19 M28 19 L28 19"
 // HANDSHAKE
 
 const handshakeAnim = keyframes`
-to {
+0%, ${startPercent} {
+  transform: translateY(0px);
+}
+100% {
     transform: translateY(4px);
 }
 `;
@@ -127,8 +141,7 @@ const HandshakeSVG = styled(SVG)`
     fill: white;
     stroke: none;
   }
-  &:hover {
-    animation-name: ${handshakeAnim};
+  animation-name: ${handshakeAnim};
   }
 `;
 
@@ -152,14 +165,13 @@ export const Handshake = () => {
 // GAVEL
 
 const gavelAnim = keyframes`
-to {d: path("M15 22.75 L15 25.5 L2 25.5 L2 20 L15 20 L15 22.75 Z M15 22.75 L21 22.75 M21 22.75 L21 26 L19.5 26 L19.5 30.5 L29.5 30.5 L29.5 26 L28 26 L28 19 L29.5 19 L29.5 14.5 L19.5 14.5 L19.5 19 L21 19 L21 22.75 Z");}
+0%, ${startPercent} {d: path("M14.5706 18.9886 L15.2824 21.6449 L2.72534 25.0096 L1.30183 19.697 L13.8589 16.3323 L14.5706 18.9886 Z M14.5706 18.9886 L20.3662 17.4357 M20.3662 17.4357 L21.2073 20.575 L19.7584 20.9632 L20.9231 25.3098 L30.5824 22.7217 L29.4177 18.375 L27.9688 18.7632 L26.1571 12.0017 L27.606 11.6135 L26.4413 7.26685 L16.782 9.85504 L17.9467 14.2017 L19.3956 13.8135 L20.3662 17.4357 Z")}
+100% {d: path("M15 22.75 L15 25.5 L2 25.5 L2 20 L15 20 L15 22.75 Z M15 22.75 L21 22.75 M21 22.75 L21 26 L19.5 26 L19.5 30.5 L29.5 30.5 L29.5 26 L28 26 L28 19 L29.5 19 L29.5 14.5 L19.5 14.5 L19.5 19 L21 19 L21 22.75 Z");}
 }
 `;
 const GavelSVG = styled(SVG)`
-  &:hover {
-    & path {
-      animation-name: ${gavelAnim};
-    }
+  & path {
+    animation-name: ${gavelAnim};
   }
 `;
 
@@ -167,7 +179,7 @@ export const Gavel = () => {
   return (
     <>
       <GavelSVG width="32" height="32">
-        <path d="M14.5706 18.9886 L15.2824 21.6449 L2.72534 25.0096 L1.30183 19.697 L13.8589 16.3323 L14.5706 18.9886 Z M14.5706 18.9886 L20.3662 17.4357 M20.3662 17.4357 L21.2073 20.575 L19.7584 20.9632 L20.9231 25.3098 L30.5824 22.7217 L29.4177 18.375 L27.9688 18.7632 L26.1571 12.0017 L27.606 11.6135 L26.4413 7.26685 L16.782 9.85504 L17.9467 14.2017 L19.3956 13.8135 L20.3662 17.4357 Z" />{" "}
+        <path d="M14.5706 18.9886 L15.2824 21.6449 L2.72534 25.0096 L1.30183 19.697 L13.8589 16.3323 L14.5706 18.9886 Z M14.5706 18.9886 L20.3662 17.4357 M20.3662 17.4357 L21.2073 20.575 L19.7584 20.9632 L20.9231 25.3098 L30.5824 22.7217 L29.4177 18.375 L27.9688 18.7632 L26.1571 12.0017 L27.606 11.6135 L26.4413 7.26685 L16.782 9.85504 L17.9467 14.2017 L19.3956 13.8135 L20.3662 17.4357 Z" />
       </GavelSVG>
     </>
   );
@@ -176,15 +188,16 @@ export const Gavel = () => {
 // BADGE
 
 const badgeAnim = keyframes`
-to {
+0%, ${startPercent} {
+  d: path("M16 10.5 L14.5 13.5 L11 14 L13.5 16.5 L13 20 L16 18.5 L19 20 L18.5 16.5 L21 14 L17.5 13.5 Z");
+}
+100% {
     d: path("M21 14 L17.5 13.5 L16 10.5 L14.5 13.5 L11 14 L13.5 16.5 L13 20 L16 18.5 L19 20 L18.5 16.5   Z");
 }
 `;
 const BadgeSVG = styled(SVG)`
-  &:hover {
-    & .star {
-      animation-name: ${badgeAnim};
-    }
+  & .star {
+    animation-name: ${badgeAnim};
   }
 `;
 
@@ -205,15 +218,16 @@ export const Badge = () => {
 // CERTIFICATE
 
 const certificateAnim = keyframes`
-to {
+0%, ${startPercent} {
+  d: path("M22 30L23 24M25 30L24 24");
+}
+100% {
     d: path("M24.2511 30.0987L23.6641 24.0443M27.1488 29.3222L24.63 23.7855");
 }
 `;
 const CertificateSVG = styled(SVG)`
-  &:hover {
-    & .ribbon {
-      animation-name: ${certificateAnim};
-    }
+  & .ribbon {
+    animation-name: ${certificateAnim};
   }
 `;
 

@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 import allWork from "./allWork";
+import Contact from "../Contact/Contact";
+
+// TODO - DELETE THIS CONTAINER
+
+const Container = styled.div`
+  width: 100%;
+  height: 800px;
+  background: grey;
+  color: red;
+  margin: 10px 0;
+`;
 
 const Work = props => {
   let links = allWork.map(project => {
@@ -23,11 +35,14 @@ const Work = props => {
     }
   });
 
+  const ContactFooter = !props.homepage ? <Contact /> : null;
+
   return (
-    <>
+    <Container>
       {links}
       <Link to="/work">View all projects</Link>
-    </>
+      {ContactFooter}
+    </Container>
   );
 };
 
