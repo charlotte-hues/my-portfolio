@@ -9,8 +9,7 @@ import Contact from "../Contact/Contact";
 
 const Container = styled.div`
   width: 100%;
-  height: 800px;
-  background: grey;
+  height: 600px;
   color: red;
   margin: 10px 0;
 `;
@@ -38,11 +37,13 @@ const Work = props => {
   const ContactFooter = !props.homepage ? <Contact /> : null;
 
   return (
-    <Container>
-      {links}
-      <Link to="/work">View all projects</Link>
+    <>
+      <Container>
+        {links}
+        <Link to="/work">View all projects</Link>
+      </Container>
       {ContactFooter}
-    </Container>
+    </>
   );
 };
 

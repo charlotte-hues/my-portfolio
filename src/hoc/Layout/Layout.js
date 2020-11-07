@@ -1,24 +1,33 @@
 import React, { useState } from "react";
-import { useSpring } from "react-spring";
+import styled from "styled-components";
 
-import Header from "./header";
-import Footer from "./footer";
+import Toolbar from "./Toolbar";
 import SideMenu from "../../components/navigation/SideMenu/SideMenu";
+
+const StyledMain = styled.main`
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 80px 20px;
+  overflow: scroll;
+`;
 
 const Layout = props => {
   const [sideMenuIsVisible, setSideMenuIsVisible] = useState(false);
 
-  const [{ scrollTop }, set] = useSpring(() => ({ scrollTop: 0 }));
-  const onScroll = e => {
-    set({ scrollTop: e.target.scrollTop });
+  const openMenu = () => {
+    setSideMenuIsVisible(true);
+  };
+
+  const closeMenu = () => {
+    setSideMenuIsVisible(false);
   };
 
   return (
     <>
-      <Header />
-      <SideMenu show={sideMenuIsVisible} close />
-      <main onScroll={onScroll}>{props.children}</main>
-      <Footer top={scrollTop} />
+      <Toolbar openMenu={openMenu} />
+      <SideMenu show={sideMenuIsVisible} close={closeMenu} />
+      <StyledMain>{props.children}</StyledMain>
     </>
   );
 };

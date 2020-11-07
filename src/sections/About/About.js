@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  height: 700px;
+  height: 600px;
   background-color: yellow;
   color: red;
 `;

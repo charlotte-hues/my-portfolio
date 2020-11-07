@@ -21,8 +21,8 @@ const StyledMenu = styled.div`
 const SideMenu = props => {
   return (
     <>
-      <StyledMenu open={props.show} onClick={props.close} />
-      <NavigationItems />
+      <StyledMenu open={props.show} onClick={() => props.close()} />
+      <NavigationItems open={props.show} close={props.close} />
     </>
   );
 };
