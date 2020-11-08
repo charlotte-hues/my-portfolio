@@ -13,16 +13,13 @@ const NavItemsContainer = styled.nav`
   z-index: 450;
   padding: 20% 20%;
 
-  opacity: ${props => (props.open ? 1 : 0)};
-  transition: opacity 0.3s ease;
-
   @media ${device.laptop} {
   }
 `;
 
 const NavigationItems = props => {
   return (
-    <NavItemsContainer open={props.open} onClick={() => props.close()}>
+    <NavItemsContainer onClick={() => props.close()}>
       <NavigationItem link="/about" active>
         ABOUT
       </NavigationItem>

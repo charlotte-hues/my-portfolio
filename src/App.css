@@ -27,13 +27,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.navText {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04rem;
-  cursor: pointer;
-}
-
 .canvas {
   position: absolute;
   top: 0;

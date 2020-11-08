@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Toolbar from "./Toolbar";
-import SideMenu from "../../components/navigation/SideMenu/SideMenu";
+import Toolbar from "./Toolbar/Toolbar";
+import SideMenu from "./SideMenu/SideMenu";
 
 const StyledMain = styled.main`
   width: 100%;
@@ -26,7 +26,7 @@ const Layout = props => {
   return (
     <>
       <Toolbar openMenu={openMenu} />
-      <SideMenu show={sideMenuIsVisible} close={closeMenu} />
+      <SideMenu isOpen={sideMenuIsVisible} close={closeMenu} />
       <StyledMain>{props.children}</StyledMain>
     </>
   );

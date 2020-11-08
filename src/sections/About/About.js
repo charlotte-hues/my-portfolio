@@ -8,6 +8,7 @@ const Container = styled.div`
   height: 600px;
   background-color: yellow;
   color: red;
+  margin: auto;
 `;
 
 const About = () => {

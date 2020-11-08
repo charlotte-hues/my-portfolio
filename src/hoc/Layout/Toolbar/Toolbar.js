@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledHeader = styled.header`
+import Menu from "../../../components/UI/Icons/Menu/Menu";
+
+const Header = styled.header`
   position: absolute;
   top: 0;
   height: 108px;
@@ -11,26 +13,27 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: black;
   z-index: 100;
 `;
 
-const Toolbar = props => {
-  const handleMenuClick = () => {
-    props.openMenu();
-  };
+const Home = styled.div`
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  cursor: pointer;
+  color: #272727;
+`;
 
+const Toolbar = props => {
   return (
-    <StyledHeader>
+    <Header>
       <Link to="/">
-        <div className="navText">
-          <span>CHARLOTTE HUES</span>
-        </div>
+        <Home>CHARLOTTE HUES</Home>
       </Link>
-      <div onClick={() => handleMenuClick()} className="navText">
+      <Menu onClick={props.openMenu}>
         <span>MENU</span>
-      </div>
-    </StyledHeader>
+      </Menu>
+    </Header>
   );
 };
 

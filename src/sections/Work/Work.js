@@ -8,10 +8,20 @@ import Contact from "../Contact/Contact";
 // TODO - DELETE THIS CONTAINER
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   width: 100%;
-  height: 600px;
   color: red;
   margin: 10px 0;
+`;
+
+const ProjectThumb = styled.div`
+  height: 150px;
+  margin: 20px 0;
+  background-color: white;
+  color: ${props => props.color};
 `;
 
 const Work = props => {
@@ -19,14 +29,14 @@ const Work = props => {
     if (!props.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          {project.title}
+          <ProjectThumb color={project.color}>{project.title}</ProjectThumb>
         </Link>
       );
     }
     if (project.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          {project.title}
+          <ProjectThumb color={project.color}>{project.title}</ProjectThumb>
         </Link>
       );
     } else {
@@ -40,7 +50,11 @@ const Work = props => {
     <>
       <Container>
         {links}
-        <Link to="/work">View all projects</Link>
+        {props.homepage && (
+          <Link to="/work">
+            <ProjectThumb>View all projects</ProjectThumb>
+          </Link>
+        )}
       </Container>
       {ContactFooter}
     </>
