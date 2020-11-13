@@ -60,6 +60,7 @@ const scalesTiltAnim = keyframes`
 `;
 
 const ScalesSVG = styled(SVG)`
+  stroke: ${props => props.iconColor};
   & .right {
     animation-name: ${scalesRightAnim};
   }
@@ -74,7 +75,7 @@ const ScalesSVG = styled(SVG)`
 export const Scales = props => {
   return (
     <>
-      <ScalesSVG width="32" height="32">
+      <ScalesSVG iconColor={props.color}>
         <path d="M4 29H16M28 29H16M16 29V9" />
         <g className="left" transform="translate(0 -2)">
           <path d="M2 18L7 11L12 18C12 20.5 9.5 23 7 23C4.5 23 2 20.5 2 18Z" />
@@ -104,16 +105,17 @@ M4 19 L4 19 M28 19 L28 19")}
   }
 `;
 const BriefcaseSVG = styled(SVG)`
+stroke: ${props => props.iconColor};
   & .lid {
       animation-name: ${breifcaseAnim};
     }
   }
 `;
 
-export const Briefcase = () => {
+export const Briefcase = props => {
   return (
     <>
-      <BriefcaseSVG width="32" height="32">
+      <BriefcaseSVG iconColor={props.color}>
         <path d="M4.90995 28.0995L4 19H13V21H19V19H28L27.09 28.0995C27.0389 28.6107 26.6088 29 26.095 29H5.90499C5.39124 29 4.96107 28.6107 4.90995 28.0995Z" />
         <path
           className="lid"
@@ -137,18 +139,19 @@ const handshakeAnim = keyframes`
 }
 `;
 const HandshakeSVG = styled(SVG)`
+  stroke: ${props => props.iconColor};
   & circle {
-    fill: white;
+    fill: ${props => props.iconColor};
     stroke: none;
   }
   animation-name: ${handshakeAnim};
   }
 `;
 
-export const Handshake = () => {
+export const Handshake = props => {
   return (
     <>
-      <HandshakeSVG width="32" height="32">
+      <HandshakeSVG iconColor={props.color}>
         <path d="M6 20H9L13.5 24.5L15.5 22.5L17 24L19.5 21.5C19.8905 21.8905 21 23 21 23L24 20H26" />
         <path d="M16.5 13.5 L23 20" />
         <circle cx="3" cy="18" r="1" />
@@ -170,15 +173,16 @@ const gavelAnim = keyframes`
 }
 `;
 const GavelSVG = styled(SVG)`
+  stroke: ${props => props.iconColor};
   & path {
     animation-name: ${gavelAnim};
   }
 `;
 
-export const Gavel = () => {
+export const Gavel = props => {
   return (
     <>
-      <GavelSVG width="32" height="32">
+      <GavelSVG iconColor={props.color}>
         <path d="M14.5706 18.9886 L15.2824 21.6449 L2.72534 25.0096 L1.30183 19.697 L13.8589 16.3323 L14.5706 18.9886 Z M14.5706 18.9886 L20.3662 17.4357 M20.3662 17.4357 L21.2073 20.575 L19.7584 20.9632 L20.9231 25.3098 L30.5824 22.7217 L29.4177 18.375 L27.9688 18.7632 L26.1571 12.0017 L27.606 11.6135 L26.4413 7.26685 L16.782 9.85504 L17.9467 14.2017 L19.3956 13.8135 L20.3662 17.4357 Z" />
       </GavelSVG>
     </>
@@ -196,15 +200,16 @@ const badgeAnim = keyframes`
 }
 `;
 const BadgeSVG = styled(SVG)`
+  stroke: ${props => props.iconColor};
   & .star {
     animation-name: ${badgeAnim};
   }
 `;
 
-export const Badge = () => {
+export const Badge = props => {
   return (
     <>
-      <BadgeSVG width="32" height="32">
+      <BadgeSVG iconColor={props.color}>
         <path d="M6 22L7 6C14 6 16 3 16 3C16 3 18 6 25 6L26 22L16.5735 28.5986C16.2291 28.8396 15.7709 28.8396 15.4265 28.5986L6 22Z" />
         <path
           className="star"
@@ -226,15 +231,16 @@ const certificateAnim = keyframes`
 }
 `;
 const CertificateSVG = styled(SVG)`
+  stroke: ${props => props.iconColor};
   & .ribbon {
     animation-name: ${certificateAnim};
   }
 `;
 
-export const Certificate = () => {
+export const Certificate = props => {
   return (
     <>
-      <CertificateSVG width="32" height="32">
+      <CertificateSVG iconColor={props.color}>
         <path className="text" d="M26 11H6M6 20H17M26 15.5H6" />
         <circle cx="23.5" cy="21.5" r="2.5" />
         <path className="ribbon" d="M22 30L23 24M25 30L24 24" />

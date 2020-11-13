@@ -1,13 +1,8 @@
 import React from "react";
-import * as LawIcons from "./content/lawIcons";
 import styled from "styled-components";
 
 import ProjectCard from "../../components/ProjectCard";
-
-const iconsArr = [];
-for (let icon in LawIcons) {
-  iconsArr.push(LawIcons[icon]);
-}
+import iconData from "./content/IconsProjectData";
 
 const IconSetContainer = styled(ProjectCard)`
   display: flex;
@@ -15,34 +10,43 @@ const IconSetContainer = styled(ProjectCard)`
   justify-content: center;
   align-items: center;
   align-content: center;
-  padding: 100px;
+  padding: 20px;
+  background-color: #e5e5e5;
+  background-color: ${props => props.background};
 `;
 
 const Container = styled.div`
   display: inline-block;
-  width: 80px;
-  height: 80px;
-  margin: 40px 60px;
+  width: 50px;
+  height: 50px;
+  width: ${props => props.size};
+  height: ${props => props.size};
+  margin: 10px 15px;
 
   position: relative;
 `;
 
-const LawIconsList = iconsArr.map(Icon => {
-  return (
-    <Container key={Icon.name}>
-      <Icon />
-    </Container>
-  );
-});
+const IconSets = Object.keys(iconData)
+  .map(setName => {
+    return (
+      <IconSetContainer key={setName} background={iconData[setName].background}>
+        {Object.keys(iconData[setName].icons).map((currIcon, i) => {
+          let Icon = iconData[setName].icons[currIcon];
+          return (
+            <Container size={iconData[setName].size} key={currIcon}>
+              <Icon color={iconData[setName].iconColor} />
+            </Container>
+          );
+        })}
+      </IconSetContainer>
+    );
+  })
+  .reduce((arr, el) => {
+    return arr.concat(el);
+  }, []);
 
 const IconsProject = () => {
-  return (
-    <>
-      <IconSetContainer>{LawIconsList}</IconSetContainer>
-      <IconSetContainer>{LawIconsList}</IconSetContainer>
-      <IconSetContainer>{LawIconsList}</IconSetContainer>
-    </>
-  );
+  return <>{IconSets}</>;
 };
 
 export default IconsProject;
