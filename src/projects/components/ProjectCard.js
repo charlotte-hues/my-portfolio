@@ -5,7 +5,7 @@ const ProjectCard = styled.div`
   border-radius: 4px;
   height: auto;
   width: 100%;
-  margin: 10px auto;
+  margin: 20px auto;
 `;
 
 export default ProjectCard;

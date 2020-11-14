@@ -21,7 +21,7 @@ const Container = styled.div`
   height: 50px;
   width: ${props => props.size};
   height: ${props => props.size};
-  margin: 10px 15px;
+  margin: 20px 30px;
 
   position: relative;
 `;

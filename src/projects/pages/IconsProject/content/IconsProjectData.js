@@ -4,9 +4,9 @@ import * as MorphIcon from "./3dMorphIcon";
 const iconData = {
   law: {
     icons: LawIcons,
-    iconColor: "blue",
-    size: "60px",
-    background: "#e5e5e5"
+    iconColor: "#858178",
+    size: "40px",
+    background: "#F5F3EF"
   },
   morph: {
     icons: MorphIcon,
