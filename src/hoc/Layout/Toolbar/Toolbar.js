@@ -21,7 +21,7 @@ const Home = styled.div`
   font-weight: 700;
   letter-spacing: 0.04rem;
   cursor: pointer;
-  color: #272727;
+  color: var(--primary);
 `;
 
 const Toolbar = props => {
@@ -30,9 +30,7 @@ const Toolbar = props => {
       <Link to="/">
         <Home>CHARLOTTE HUES</Home>
       </Link>
-      <Menu onClick={props.openMenu}>
-        <span>MENU</span>
-      </Menu>
+      <Menu onClick={props.openMenu} color={"var(--primary)"} />
     </Header>
   );
 };

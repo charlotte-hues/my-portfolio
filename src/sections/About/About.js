@@ -6,8 +6,8 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100%;
   height: 600px;
-  background-color: yellow;
-  color: red;
+  background-color: var(--background2);
+  color: var(--background4);
   margin: auto;
 `;
 

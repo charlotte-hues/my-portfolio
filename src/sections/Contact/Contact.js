@@ -6,8 +6,8 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100%;
   height: 250px;
-  background: white;
-  color: red;
+  background: var(--background2);
+  color: var(--primary);
 `;
 
 const Contact = () => {

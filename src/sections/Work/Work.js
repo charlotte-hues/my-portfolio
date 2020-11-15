@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import allWork from "./allWork";
 import Contact from "../Contact/Contact";
+import ProjectThumb from "./ProjectThumb";
 
 // TODO - DELETE THIS CONTAINER
 
@@ -17,19 +18,12 @@ const Container = styled.div`
   margin: 10px 0;
 `;
 
-const ProjectThumb = styled.div`
-  height: 150px;
-  margin: 20px 0;
-  background-color: white;
-  color: ${props => props.color};
-`;
-
 const Work = props => {
   let links = allWork.map(project => {
     if (!props.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb color={project.color}>{project.title}</ProjectThumb>
+          <ProjectThumb>{project.title}</ProjectThumb>
         </Link>
       );
     }

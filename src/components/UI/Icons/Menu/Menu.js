@@ -21,6 +21,7 @@ const MenuSVG = styled.svg.attrs({
         stroke-width: 2;
         stroke-linejoin: round;
         stroke: #272727;
+        stroke: ${props => props.IconColor};
     }  
 
     &:hover {
@@ -37,7 +38,7 @@ const MenuSVG = styled.svg.attrs({
 
 const Menu = props => {
   return (
-    <MenuSVG onClick={props.onClick}>
+    <MenuSVG onClick={props.onClick} IconColor={props.color}>
       <path className="top" d="M16 4 L4 8 L16 12 L28 8 L16 4" />
       <path className="middle" d="M8 14 L4 16 L16 20 L28 16 L24 14" />
       <path className="bottom" d="M8 22 L4 24 L16 28 L28 24 L24 22" />
