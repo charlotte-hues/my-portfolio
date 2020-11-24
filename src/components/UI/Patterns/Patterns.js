@@ -40,9 +40,9 @@ const Patterns = props => {
           <Gradient />
           <GrainyTexture />
         </defs>
-        {props.shapes.stretch.map(shape => Shapes(shape))}
+        {props.stretch.map(shape => Shapes(shape))}
       </StretchSVG>
-      <StaticSVG>{props.shapes.static.map(shape => Shapes(shape))}</StaticSVG>
+      <StaticSVG>{props.fixed.map(shape => Shapes(shape))}</StaticSVG>
     </>
   );
 };
