@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import ProjectCard from "../../components/ProjectCard";
-import iconData from "./content/IconsProjectData";
+import ProjectCard from "../components/ProjectCard";
+import iconData from "./IconsProject/content/IconsProjectData";
 
 const IconSetContainer = styled(ProjectCard)`
   display: flex;

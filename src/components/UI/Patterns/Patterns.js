@@ -11,8 +11,9 @@ const Patterns = ({ patternData }) => {
   useEffect(() => {
     async function loadShapes() {
       const shapePromises = patternData.map(async shape => {
-        const View = await importShape(shape.component);
-        return <View key={shape.uid} {...shape} />;
+        const Shape = await importShape(shape.component);
+        console.log(shape);
+        return <Shape key={shape.uid} {...shape} />;
       });
       Promise.all(shapePromises).then(setShapes);
     }
