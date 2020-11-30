@@ -10,7 +10,35 @@ const allWork = [
     client: "various",
     year: `2018 - ${currentYear}`,
     homepage: true,
-    color: "aqua"
+    color: "aqua",
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "iconsCircle1"
+        },
+        {
+          component: "Circle",
+          color: "red",
+          width: "100px",
+          texture: true,
+          rotate: "45",
+          layer: "1",
+          top: "0%",
+          position: ["50%", "50%"],
+          stripes: { rotation: "-45" },
+          uid: "iconsCircle2"
+        }
+      ]
+    }
   },
   {
     pathName: "logos",
@@ -19,7 +47,23 @@ const allWork = [
     client: "various",
     year: `2018 - ${currentYear}`,
     homepage: false,
-    color: "pink"
+    color: "pink",
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "logosCircle1"
+        }
+      ]
+    }
   },
   {
     pathName: "enfocengine",
@@ -28,7 +72,22 @@ const allWork = [
     client: "Jacobs Technology",
     year: `2018 - ${currentYear}`,
     homepage: false,
-    color: "pink"
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "eeCircle1"
+        }
+      ]
+    }
   },
   {
     pathName: "emotion-sim",
@@ -37,7 +96,22 @@ const allWork = [
     client: "The Future Laboratory",
     year: `2020`,
     homepage: true,
-    color: "pink"
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "emotSimCircle1"
+        }
+      ]
+    }
   },
   {
     pathName: "infinite-coloring-book",
@@ -46,7 +120,22 @@ const allWork = [
     client: "My two step children!",
     year: `2020`,
     homepage: true,
-    color: "orange"
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "coloringbookCircle1"
+        }
+      ]
+    }
   },
   {
     pathName: "project-60",
@@ -55,7 +144,22 @@ const allWork = [
     client: "Jacobs",
     year: `2018 - ${currentYear}`,
     homepage: false,
-    color: "pink"
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "p60circle1"
+        }
+      ]
+    }
   },
   {
     pathName: "glitch",
@@ -64,7 +168,22 @@ const allWork = [
     client: "Adidas",
     year: `2017`,
     homepage: false,
-    color: "green"
+    pattern: {
+      background: "var(--background4)",
+      shapes: [
+        {
+          component: "Circle",
+          width: "150px",
+          texture: true,
+          rotate: "45",
+          layer: "0",
+          top: "0%",
+          position: ["-10%", "50%"],
+          stripes: { invert: true, rotation: "45" },
+          uid: "glitchCircle1"
+        }
+      ]
+    }
   }
 ];
 

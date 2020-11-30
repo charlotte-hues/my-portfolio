@@ -1,48 +1,28 @@
-import React from "react";
-import styled from "styled-components";
+import React, { lazy, useState, useEffect } from "react";
 
-import { Gradient, GrainyTexture } from "./Shapes/Defs";
-import Shapes from "./Shapes/Shapes";
+const importShape = shapeName =>
+  lazy(() =>
+    import(`./Shapes/${shapeName}`).catch(() => import(`./Shapes/NullShape`))
+  );
 
-const viewBox = "0 0 280 280";
+const Patterns = ({ patternData }) => {
+  const [shapes, setShapes] = useState([]);
 
-const StretchSVG = styled.svg.attrs({
-  viewBox: viewBox,
-  preserveAspectRatio: "none"
-})`
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  display: block;
-  bottom: 0;
-  z-index: -10;
-`;
+  useEffect(() => {
+    async function loadShapes() {
+      const shapePromises = patternData.map(async shape => {
+        const View = await importShape(shape.component);
+        return <View key={shape.uid} {...shape} />;
+      });
+      Promise.all(shapePromises).then(setShapes);
+    }
 
-const StaticSVG = styled.svg.attrs({
-  viewBox: viewBox,
-  preserveAspectRatio: "xMinYMid slice"
-})`
-  // margin: auto;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  display: block;
-  bottom: 0;
-  z-index: -10;
-`;
+    loadShapes();
+  }, [patternData]);
 
-const Patterns = props => {
   return (
     <>
-      <StretchSVG vb={viewBox}>
-        <defs>
-          <Gradient />
-          <GrainyTexture />
-        </defs>
-        {props.stretch.map(shape => Shapes(shape))}
-      </StretchSVG>
-      <StaticSVG>{props.fixed.map(shape => Shapes(shape))}</StaticSVG>
+      <React.Suspense fallback=" ">{shapes}</React.Suspense>
     </>
   );
 };

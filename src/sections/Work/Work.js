@@ -18,82 +18,19 @@ const Container = styled.div`
   margin: 10px 0;
 `;
 
-const patternData1 = {
-  stretch: [
-    {
-      component: "background",
-      uid: "hsabdck",
-      data: {
-        color: "var(--background3)"
-      }
-    },
-    {
-      component: "waves",
-      uid: "beufvauds",
-      data: {
-        color: "var(--primary)",
-        stripes: true,
-        texture: true
-      }
-    }
-  ],
-  fixed: [
-    {
-      component: "circle",
-      uid: "cjshdjsdc",
-      data: {
-        color: "var(--primary)",
-        texture: true,
-        stripes: {
-          invert: false,
-          rotation: "0",
-          opacity: "0.7",
-          width: "6",
-          gap: "4px"
-        }
-      }
-    }
-  ]
-};
-
 const patternData2 = {
-  stretch: [
+  background: "var(--background4)",
+  shapes: [
     {
-      component: "background",
-      uid: "hsabvdck",
-      data: {
-        color: "var(--background3)"
-      }
-    },
-    {
-      component: "waves",
-      uid: "beufvauds",
-      data: {
-        color: "var(--primary)",
-        stripes: true,
-        texture: true
-      }
-    }
-  ],
-  fixed: [
-    {
-      component: "circle",
-      uid: "kkksjsj",
-      data: {
-        color: "var(--background)",
-        texture: true,
-        x: "100%",
-        y: "100%",
-        size: "200",
-
-        stripes: {
-          invert: true,
-          rotation: "45",
-          opacity: "0.7",
-          width: "6",
-          gap: "4px"
-        }
-      }
+      component: "Circle",
+      width: "150px",
+      texture: true,
+      rotate: "45",
+      layer: "0",
+      top: "0%",
+      position: ["-10%", "50%"],
+      stripes: { invert: true, rotation: "45" },
+      uid: "vv"
     }
   ]
 };
@@ -103,7 +40,7 @@ const Work = props => {
     if (!props.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb patternData={patternData2}>
+          <ProjectThumb patternData={project.pattern}>
             {project.title}
           </ProjectThumb>
         </Link>
@@ -112,7 +49,7 @@ const Work = props => {
     if (project.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb patternData={patternData2}>
+          <ProjectThumb patternData={project.pattern}>
             {project.title}
           </ProjectThumb>
         </Link>
