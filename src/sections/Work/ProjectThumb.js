@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 import Patterns from "../../components/UI/Patterns/Patterns";
 
@@ -23,13 +24,33 @@ const ThumbTitle = styled.div`
   margin: 20px;
 `;
 
+const AnimatedThumbTitle = animated(ThumbTitle);
+
 const ProjectThumb = ({ patternData, children }) => {
+  const [{ o, color, test }, set] = useSpring(() => ({
+    from: { o: 0, color: "red", test: 0 },
+    o: 1,
+    color: "green",
+    test: 22
+  }));
+
+  const onMove = e => {
+    set({ test: e.clientX });
+  };
+
   return (
-    <Container backgroundColor={patternData.background}>
+    <Container backgroundColor={patternData.background} onMouseMove={onMove}>
       <Patterns patternData={patternData.shapes} />
-      <ThumbTitle>
-        <h3>{children}</h3>
-      </ThumbTitle>
+      <AnimatedThumbTitle
+        style={{
+          color,
+          opacity: o.interpolate([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1])
+        }}
+      >
+        {/* {test.interpolate(x => x.toFixed(0))} */}
+        {color.interpolate(x => x)}
+        {/* <animated.h3>{children}</animated.h3> */}
+      </AnimatedThumbTitle>
     </Container>
   );
 };

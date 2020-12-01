@@ -5,14 +5,13 @@ const importShape = shapeName =>
     import(`./Shapes/${shapeName}`).catch(() => import(`./Shapes/NullShape`))
   );
 
-const Patterns = ({ patternData }) => {
+const Patterns = ({ patternData, movement }) => {
   const [shapes, setShapes] = useState([]);
 
   useEffect(() => {
     async function loadShapes() {
       const shapePromises = patternData.map(async shape => {
         const Shape = await importShape(shape.component);
-        console.log(shape);
         return <Shape key={shape.uid} {...shape} />;
       });
       Promise.all(shapePromises).then(setShapes);
