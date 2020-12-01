@@ -5,20 +5,22 @@ const importShape = shapeName =>
     import(`./Shapes/${shapeName}`).catch(() => import(`./Shapes/NullShape`))
   );
 
-const Patterns = ({ patternData, movement }) => {
+const Patterns = ({ patternData, animatedValue }) => {
   const [shapes, setShapes] = useState([]);
 
   useEffect(() => {
     async function loadShapes() {
       const shapePromises = patternData.map(async shape => {
         const Shape = await importShape(shape.component);
-        return <Shape key={shape.uid} {...shape} />;
+        return (
+          <Shape key={shape.uid} {...shape} animatedValue={animatedValue} />
+        );
       });
       Promise.all(shapePromises).then(setShapes);
     }
 
     loadShapes();
-  }, [patternData]);
+  }, [patternData, animatedValue]);
 
   return (
     <>

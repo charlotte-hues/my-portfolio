@@ -18,21 +18,29 @@ const Container = styled.div`
   margin: 10px 0;
 `;
 
-const patternData2 = {
-  background: "var(--background4)",
-  shapes: [
-    {
-      component: "Circle",
-      width: "150px",
-      texture: true,
-      rotate: "45",
-      layer: "0",
-      top: "0%",
-      position: ["-10%", "50%"],
-      stripes: { invert: true, rotation: "45" },
-      uid: "vv"
-    }
-  ]
+const Circle1 = {
+  component: "Circle",
+  texture: true,
+  layer: "0",
+  stripes: {
+    invert: true,
+    rotation: 45
+  },
+  width: {
+    main: 150,
+    start: 2,
+    end: 2
+  },
+  x: {
+    main: 50,
+    start: 0,
+    end: 100
+  },
+  y: {
+    main: 50,
+    start: 100,
+    end: 0
+  }
 };
 
 const Work = props => {
@@ -40,7 +48,17 @@ const Work = props => {
     if (!props.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb patternData={project.pattern}>
+          <ProjectThumb
+            patternData={{
+              background: "var(--background2)",
+              shapes: [
+                {
+                  ...Circle1,
+                  uid: `${project.pathName}Circle1`
+                }
+              ]
+            }}
+          >
             {project.title}
           </ProjectThumb>
         </Link>
@@ -49,7 +67,17 @@ const Work = props => {
     if (project.homepage) {
       return (
         <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb patternData={project.pattern}>
+          <ProjectThumb
+            patternData={{
+              background: "var(--background2)",
+              shapes: [
+                {
+                  ...Circle1,
+                  uid: `${project.pathName}Circle1`
+                }
+              ]
+            }}
+          >
             {project.title}
           </ProjectThumb>
         </Link>
@@ -67,7 +95,17 @@ const Work = props => {
         {links}
         {props.homepage && (
           <Link to="/work">
-            <ProjectThumb patternData={patternData2}>
+            <ProjectThumb
+              patternData={{
+                background: "var(--background2)",
+                shapes: [
+                  {
+                    ...Circle1,
+                    uid: `viewallCircle1`
+                  }
+                ]
+              }}
+            >
               View all projects
             </ProjectThumb>
           </Link>

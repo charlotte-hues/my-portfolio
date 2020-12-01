@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 
@@ -15,42 +15,116 @@ const Container = styled.div`
 const ThumbTitle = styled.div`
   position: absolute;
   top: 10%;
-  width: 160px;
+  width: auto
   height: 160px;
-  border-radius: 100%;
-  color: var(--primary);
-  background: var(--background);
-  justify-content: center;
+  
+  color: var(--background4);
+  justify-text: top;
+  text-align: left;
   margin: 20px;
+  z-index: 100;
+
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: 160px;
+    background: var(--background);
+    border-radius: 100%;
+    content: "";
+    z-index: -10;
+  }
+
+
+  & h3 {
+    position: relative;
+    margin: 0;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    line-height: 2.8rem;
+
+    -webkit-text-stroke-width: 1px;
+	  -moz-text-stroke-width: 1px;  
+    -webkit-text-stroke-color: var(--primary);
+	  -moz-text-stroke-color: var(--primary);
+  
+    color: transparent;
+
+    &:after {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      -webkit-text-stroke-width: 0px;
+      -moz-text-stroke-width: 0px;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      line-height: 2.8rem;
+      left: calc(50% + 6px);
+      top: calc(50% + 6px);
+      content: "${props => props.content}";
+      z-index: -1;
+      position: absolute;
+      transform: translate(-50%, -50%);
+
+      background-color: var(--background4);
+
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+      -moz-text-fill-color: transparent;
+    }
+  }
 `;
 
 const AnimatedThumbTitle = animated(ThumbTitle);
 
 const ProjectThumb = ({ patternData, children }) => {
-  const [{ o, color, test }, set] = useSpring(() => ({
-    from: { o: 0, color: "red", test: 0 },
+  console.log(patternData);
+  const thumbRef = useRef();
+  const [{ top }, set] = useSpring(() => ({
+    from: { o: 0, color: "red", test: 0, top: 0 },
     o: 1,
     color: "green",
-    test: 22
+    test: 22,
+    top: 0
   }));
 
-  const onMove = e => {
-    set({ test: e.clientX });
-  };
+  const onScroll = useCallback(() => {
+    set({ top: thumbRef.current.getBoundingClientRect().top });
+  }, [set]);
+
+  useEffect(() => {
+    const main = document.getElementById("MainContent");
+    main.addEventListener("scroll", onScroll);
+
+    return () => {
+      main.removeEventListener("scroll", onScroll);
+    };
+  }, [onScroll]);
+
+  useEffect(() => {
+    if (thumbRef.current !== undefined) {
+      set({ top: thumbRef.current.getBoundingClientRect().top });
+    }
+  }, [thumbRef, set]);
+
+  console.log(children);
 
   return (
-    <Container backgroundColor={patternData.background} onMouseMove={onMove}>
-      <Patterns patternData={patternData.shapes} />
-      <AnimatedThumbTitle
-        style={{
-          color,
-          opacity: o.interpolate([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1])
-        }}
-      >
+    <Container backgroundColor={patternData.background} ref={thumbRef}>
+      <Patterns
+        patternData={patternData.shapes}
+        animatedValue={{ value: top, range: [-200, 160, 600] }}
+      />
+      <ThumbTitle content={children}>
+        {/* {top.interpolate(x => x.toFixed(0))} */}
         {/* {test.interpolate(x => x.toFixed(0))} */}
-        {color.interpolate(x => x)}
-        {/* <animated.h3>{children}</animated.h3> */}
-      </AnimatedThumbTitle>
+        {/* {color.interpolate(x => x)} */}
+        <h3>{children}</h3>
+      </ThumbTitle>
     </Container>
   );
 };

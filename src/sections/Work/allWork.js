@@ -1,5 +1,63 @@
 const currentYear = new Date().getFullYear();
 
+const Circle1 = {
+  fixed: {
+    component: "Circle",
+    texture: true,
+    layer: "0",
+    stripes: {
+      invert: true,
+      rotation: 45
+    },
+    animatable: {
+      width: {
+        main: 40,
+        start: 2,
+        end: 2
+      },
+      x: {
+        main: 50,
+        start: 0,
+        end: 100
+      },
+      y: {
+        main: 50,
+        start: 100,
+        end: 0
+      }
+    }
+  }
+};
+
+const Circle2 = {
+  fixed: {
+    component: "Circle",
+    texture: true,
+    layer: "0",
+    stripes: {
+      invert: true,
+      rotation: 45
+    },
+    animatable: {
+      width: {
+        main: 100,
+        start: 200,
+        end: 200
+      },
+      x: {
+        main: 10,
+        start: 2,
+        end: 10
+      },
+      y: {
+        main: 10,
+        start: 70,
+        end: 0
+      }
+    }
+  }
+};
+
 const allWork = [
   {
     pathName: "icons",
@@ -7,35 +65,7 @@ const allWork = [
     title: "Iconography",
     client: "various",
     year: `2018 - ${currentYear}`,
-    homepage: true,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "iconsCircle1"
-        },
-        {
-          component: "Circle",
-          color: "red",
-          width: "100px",
-          texture: true,
-          rotate: "45",
-          layer: "1",
-          top: "0%",
-          position: ["50%", "50%"],
-          stripes: { rotation: "-45" },
-          uid: "iconsCircle2"
-        }
-      ]
-    }
+    homepage: true
   },
   {
     pathName: "logos",
@@ -43,24 +73,7 @@ const allWork = [
     title: "Logofolio",
     client: "various",
     year: `2018 - ${currentYear}`,
-    homepage: false,
-    color: "pink",
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "logosCircle1"
-        }
-      ]
-    }
+    homepage: false
   },
   {
     pathName: "enfocengine",
@@ -68,23 +81,7 @@ const allWork = [
     title: "Enforcengine App Suite",
     client: "Jacobs Technology",
     year: `2018 - ${currentYear}`,
-    homepage: false,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "eeCircle1"
-        }
-      ]
-    }
+    homepage: false
   },
   {
     pathName: "emotion-sim",
@@ -92,23 +89,7 @@ const allWork = [
     title: "Emotion Simulator",
     client: "The Future Laboratory",
     year: `2020`,
-    homepage: true,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "emotSimCircle1"
-        }
-      ]
-    }
+    homepage: true
   },
   {
     pathName: "infinite-coloring-book",
@@ -116,23 +97,7 @@ const allWork = [
     title: "The Infinite Colouring Book",
     client: "My two step children!",
     year: `2020`,
-    homepage: true,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "coloringbookCircle1"
-        }
-      ]
-    }
+    homepage: true
   },
   {
     pathName: "project-60",
@@ -140,23 +105,7 @@ const allWork = [
     title: "Project 60",
     client: "Jacobs",
     year: `2018 - ${currentYear}`,
-    homepage: false,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "p60circle1"
-        }
-      ]
-    }
+    homepage: false
   },
   {
     pathName: "glitch",
@@ -164,23 +113,7 @@ const allWork = [
     title: "Glitch Boot",
     client: "Adidas",
     year: `2017`,
-    homepage: false,
-    pattern: {
-      background: "var(--background4)",
-      shapes: [
-        {
-          component: "Circle",
-          width: "150px",
-          texture: true,
-          rotate: "45",
-          layer: "0",
-          top: "0%",
-          position: ["-10%", "50%"],
-          stripes: { invert: true, rotation: "45" },
-          uid: "glitchCircle1"
-        }
-      ]
-    }
+    homepage: false
   }
 ];
 

@@ -27,7 +27,7 @@ const Layout = props => {
     <>
       <Toolbar openMenu={openMenu} />
       <SideMenu isOpen={sideMenuIsVisible} close={closeMenu} />
-      <StyledMain>{props.children}</StyledMain>
+      <StyledMain id="MainContent">{props.children}</StyledMain>
     </>
   );
 };

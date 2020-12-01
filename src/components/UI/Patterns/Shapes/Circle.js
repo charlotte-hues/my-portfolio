@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 import { Stripes, GrainyTexture } from "./Defs";
 import ConditionalWrapper from "../../../../hoc/Utility/ConditionalWrapper";
@@ -9,18 +10,62 @@ const Container = styled.svg.attrs({
   preserveAspectRatio: "xMinYMid slice",
   xmlns: "http://www.w3.org/2000/svg"
 })`
-  display: block;
   height: ${props => (props.height ? props.height : "100%")};
   width: ${props => (props.width ? props.width : "100%")};
+  left: ${props => (props.left ? props.left : "0")}%;
+  top: ${props => (props.top ? props.top : "0")}%;
+
   z-index: ${props => (props.layer ? props.layer : "0")};
+
+  display: block;
   position: absolute;
-  left: ${props => (props.position ? props.position[0] : "0")};
-  top: ${props => (props.position ? props.position[1] : "0")};
 `;
 
-const Circle = ({ width, layer, color, texture, stripes, uid, position }) => {
+const AnimatedContainer = animated(Container);
+
+const interp = ({ animatedValue, value }) =>
+  animatedValue.interpolate({
+    extrapolate: "clamp",
+    range: [-200, 160, 600],
+    output: [value.end, value.main, value.start]
+  });
+
+const Circle = ({
+  animatedValue,
+  width,
+  x,
+  y,
+  layer,
+  color,
+  texture,
+  stripes,
+  uid
+}) => {
+  const interpSize = interp({
+    animatedValue: animatedValue.value,
+    range: animatedValue.range,
+    value: width
+  });
+  const interpX = interp({
+    animatedValue: animatedValue.value,
+    range: animatedValue.range,
+    value: x
+  });
+  const interpY = interp({
+    animatedValue: animatedValue.value,
+    range: animatedValue.range,
+    value: y
+  });
+
   return (
-    <Container width={width} height={width} layer={layer} position={position}>
+    <AnimatedContainer
+      width={interpSize}
+      height={interpSize}
+      layer={layer}
+      // position={[interpX, interpY]}
+      left={interpX}
+      top={interpY}
+    >
       {texture && (
         <defs>
           <GrainyTexture />
@@ -39,7 +84,8 @@ const Circle = ({ width, layer, color, texture, stripes, uid, position }) => {
           mask={texture && "url(#grainy)"}
         />
       </ConditionalWrapper>
-    </Container>
+      <animated.div>{interpX}</animated.div>
+    </AnimatedContainer>
   );
 };
 
