@@ -20,8 +20,9 @@ const Container = styled.div`
 
 const Circle1 = {
   component: "Circle",
-  texture: true,
   layer: "0",
+  color: "var(--primary)",
+  texture: true,
   stripes: {
     invert: true,
     rotation: 45
@@ -29,7 +30,7 @@ const Circle1 = {
   width: {
     main: 150,
     start: 2,
-    end: 2
+    end: 40
   },
   x: {
     main: 50,
@@ -43,48 +44,52 @@ const Circle1 = {
   }
 };
 
+const Circle2 = {
+  component: "Waves",
+  layer: "0",
+  color: "var(--background4)",
+  texture: true,
+  stripes: false,
+  width: {
+    main: 100,
+    start: 200,
+    end: 200
+  },
+  x: {
+    main: 40,
+    start: 2,
+    end: 2
+  },
+  y: {
+    main: 20,
+    start: 70,
+    end: 0
+  }
+};
+
 const Work = props => {
   let links = allWork.map(project => {
-    if (!props.homepage) {
-      return (
-        <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb
-            patternData={{
-              background: "var(--background2)",
-              shapes: [
-                {
-                  ...Circle1,
-                  uid: `${project.pathName}Circle1`
-                }
-              ]
-            }}
-          >
-            {project.title}
-          </ProjectThumb>
-        </Link>
-      );
-    }
-    if (project.homepage) {
-      return (
-        <Link key={project.pathName} to={"/work/" + project.pathName}>
-          <ProjectThumb
-            patternData={{
-              background: "var(--background2)",
-              shapes: [
-                {
-                  ...Circle1,
-                  uid: `${project.pathName}Circle1`
-                }
-              ]
-            }}
-          >
-            {project.title}
-          </ProjectThumb>
-        </Link>
-      );
-    } else {
-      return null;
-    }
+    return props.homepage && project.homepage ? null : (
+      <Link key={project.pathName} to={"/work/" + project.pathName}>
+        <ProjectThumb
+          patternData={{
+            background: "var(--background2)",
+            shapes: [
+              {
+                ...Circle1,
+                uid: `${project.pathName}Circle1`
+              },
+              {
+                ...Circle2,
+                uid: `${project.pathName}Circle2`
+              }
+            ]
+          }}
+        >
+          {project.title}
+        </ProjectThumb>
+      </Link>
+    );
   });
 
   const ContactFooter = !props.homepage ? <Contact /> : null;

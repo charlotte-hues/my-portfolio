@@ -1,6 +1,6 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSpring, animated } from "react-spring";
+import { useSpring } from "react-spring";
 
 import Patterns from "../../components/UI/Patterns/Patterns";
 
@@ -60,14 +60,15 @@ const ThumbTitle = styled.div`
       font-size: 3rem;
       letter-spacing: 2px;
       line-height: 2.8rem;
-      left: calc(50% + 6px);
-      top: calc(50% + 6px);
+      left: calc(50% + 4px);
+      top: calc(50% + 4px);
       content: "${props => props.content}";
       z-index: -1;
       position: absolute;
       transform: translate(-50%, -50%);
 
-      background-color: var(--background4);
+      background-color: var(--primary);
+      opacity: 0.3;
 
       -webkit-background-clip: text;
       -moz-background-clip: text;
@@ -79,18 +80,10 @@ const ThumbTitle = styled.div`
   }
 `;
 
-const AnimatedThumbTitle = animated(ThumbTitle);
-
 const ProjectThumb = ({ patternData, children }) => {
-  console.log(patternData);
   const thumbRef = useRef();
-  const [{ top }, set] = useSpring(() => ({
-    from: { o: 0, color: "red", test: 0, top: 0 },
-    o: 1,
-    color: "green",
-    test: 22,
-    top: 0
-  }));
+  const [{ top }, set] = useSpring(() => ({ top: 0 }));
+  const [range, setRange] = useState([-200, 160, 600]);
 
   const onScroll = useCallback(() => {
     set({ top: thumbRef.current.getBoundingClientRect().top });
@@ -107,22 +100,23 @@ const ProjectThumb = ({ patternData, children }) => {
 
   useEffect(() => {
     if (thumbRef.current !== undefined) {
+      let height = thumbRef.current.getBoundingClientRect().height;
+      setRange([
+        0 - height / 2,
+        window.innerHeight / 2 - 10,
+        window.innerHeight
+      ]);
       set({ top: thumbRef.current.getBoundingClientRect().top });
     }
   }, [thumbRef, set]);
-
-  console.log(children);
 
   return (
     <Container backgroundColor={patternData.background} ref={thumbRef}>
       <Patterns
         patternData={patternData.shapes}
-        animatedValue={{ value: top, range: [-200, 160, 600] }}
+        animatedValue={{ value: top, range: range }}
       />
       <ThumbTitle content={children}>
-        {/* {top.interpolate(x => x.toFixed(0))} */}
-        {/* {test.interpolate(x => x.toFixed(0))} */}
-        {/* {color.interpolate(x => x)} */}
         <h3>{children}</h3>
       </ThumbTitle>
     </Container>
