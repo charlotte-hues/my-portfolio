@@ -20,7 +20,7 @@ const ThumbTitle = styled.div`
   color: var(--background4);
   justify-text: top;
   text-align: left;
-  margin: 20px;
+  margin: 20px;  
   // z-index: 100;
 
   &:after {

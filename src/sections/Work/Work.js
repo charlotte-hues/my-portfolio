@@ -20,6 +20,7 @@ const Container = styled.div`
 
 const StyledLink = styled(Link)`
   margin: 20px 0;
+  overflow: hidden;
 `;
 
 const Circle1 = {
