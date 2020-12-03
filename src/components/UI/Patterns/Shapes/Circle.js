@@ -5,11 +5,16 @@ import { Stripes, GrainyTexture } from "./Defs";
 import ConditionalWrapper from "../../../../hoc/Utility/ConditionalWrapper";
 import { clampedInterpolation as interp } from "../../Animations/clampedInterpolation";
 
+const addPercentage = x => {
+  return `${x}%`;
+};
+
 const Circle = ({
   animatedValue,
   width,
   x,
   y,
+  opacity,
   layer,
   color,
   texture,
@@ -17,11 +22,20 @@ const Circle = ({
   uid
 }) => {
   const interpSize = interp(animatedValue, width);
-  const interpX = interp(animatedValue, x).interpolate(x => `${x}%`);
-  const interpY = interp(animatedValue, y).interpolate(x => `${x}%`);
+  const interpX = interp(animatedValue, x, addPercentage);
+  const interpY = interp(animatedValue, y, addPercentage);
+  const interpOpacity = interp(animatedValue, opacity);
+  const interpColor = interp(animatedValue, color);
 
   return (
-    <animated.div style={{ position: "absolute", left: interpX, top: interpY }}>
+    <animated.div
+      style={{
+        position: "absolute",
+        left: interpX,
+        top: interpY,
+        opacity: interpOpacity
+      }}
+    >
       <animated.svg
         viewBox="0 0 280 280"
         preserveAspectRatio="xMinYMid slice"
@@ -50,7 +64,7 @@ const Circle = ({
             cx="140"
             cy="140"
             r="140"
-            fill={color ? color : "var(--primary)"}
+            fill={color ? interpColor : "var(--primary)"}
             mask={texture && "url(#grainy)"}
           />
         </ConditionalWrapper>

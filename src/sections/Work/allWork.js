@@ -4,7 +4,7 @@ const allWork = [
   {
     pathName: "icons",
     component: "IconsProject",
-    title: "Iconography",
+    title: "ICONOGRAPHY",
     client: "various",
     year: `2018 - ${currentYear}`,
     homepage: true
@@ -12,7 +12,7 @@ const allWork = [
   {
     pathName: "logos",
     component: "IconsProject",
-    title: "Logofolio",
+    title: "LOGOFOLIO",
     client: "various",
     year: `2018 - ${currentYear}`,
     homepage: false
@@ -20,7 +20,7 @@ const allWork = [
   {
     pathName: "enfocengine",
     component: "IconsProject",
-    title: "Enforcengine App Suite",
+    title: "ENFORCENGINE APP SUITE",
     client: "Jacobs Technology",
     year: `2018 - ${currentYear}`,
     homepage: false
@@ -28,7 +28,7 @@ const allWork = [
   {
     pathName: "emotion-sim",
     component: "IconsProject",
-    title: "Emotion Simulator",
+    title: "EMOTION SIMULATOR",
     client: "The Future Laboratory",
     year: `2020`,
     homepage: true
@@ -36,7 +36,7 @@ const allWork = [
   {
     pathName: "infinite-coloring-book",
     component: "IconsProject",
-    title: "The Infinite Colouring Book",
+    title: "THE INFINITE COLORING BOOK",
     client: "My two step children!",
     year: `2020`,
     homepage: true
@@ -44,7 +44,7 @@ const allWork = [
   {
     pathName: "project-60",
     component: "IconsProject",
-    title: "Project 60",
+    title: "PROJECT 60",
     client: "Jacobs",
     year: `2018 - ${currentYear}`,
     homepage: false
@@ -52,7 +52,7 @@ const allWork = [
   {
     pathName: "glitch",
     component: "IconsProject",
-    title: "Glitch Boot",
+    title: "GLITCH",
     client: "Adidas",
     year: `2017`,
     homepage: false

@@ -25,50 +25,28 @@ const StyledLink = styled(Link)`
 const Circle1 = {
   component: "Circle",
   layer: "0",
-  color: "var(--background)",
+  color: "var(--primary)",
   texture: true,
-  stripes: {
-    invert: true,
-    rotation: 45
-  },
-  width: {
-    start: 40,
-    mid: 150,
-    end: 2
-  },
-  x: {
-    start: 100,
-    mid: 50,
-    end: 0
-  },
-  y: {
-    start: 0,
-    mid: 50,
-    end: 100
-  }
+  // stripes: {
+  //   invert: true,
+  //   rotation: 45
+  // },
+  width: 150,
+  x: [100, 50, 0],
+  y: [0, 50, 100],
+  opacity: [0, 0.5, 0]
 };
 
-const Circle2 = {
+const Waves = {
   component: "Waves",
   layer: "0",
-  color: "var(--background4)",
+  color: "var(--primary)",
   texture: true,
   stripes: true,
-  width: {
-    start: 200,
-    mid: 100,
-    end: 200
-  },
-  x: {
-    start: 2,
-    mid: 40,
-    end: 2
-  },
-  y: {
-    start: 0,
-    mid: 20,
-    end: 70
-  }
+  width: "100%",
+  height: "100%",
+  x: [0, 0, 0],
+  y: [0, 0, 0]
 };
 
 const Work = props => {
@@ -84,8 +62,8 @@ const Work = props => {
                 uid: `${project.pathName}Circle1`
               },
               {
-                ...Circle2,
-                uid: `${project.pathName}Circle2`
+                ...Waves,
+                uid: `${project.pathName}Waves`
               }
             ]
           }}

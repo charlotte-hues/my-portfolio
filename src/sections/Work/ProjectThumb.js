@@ -21,7 +21,7 @@ const ThumbTitle = styled.div`
   justify-text: top;
   text-align: left;
   margin: 20px;
-  z-index: 100;
+  // z-index: 100;
 
   &:after {
     position: absolute;
@@ -29,24 +29,25 @@ const ThumbTitle = styled.div`
     left: 0;
     width: 160px;
     height: 160px;
-    background: var(--background);
+    background: var(--background2);
     border-radius: 100%;
     content: "";
-    z-index: -10;
   }
 
 
   & h3 {
     position: relative;
     margin: 0;
-    font-size: 3rem;
-    letter-spacing: 2px;
+    height: 160px;
+    font-size: 2rem;
+    letter-spacing: 3px;
     line-height: 2.8rem;
+    z-index: 2;
 
     -webkit-text-stroke-width: 1px;
 	  -moz-text-stroke-width: 1px;  
     -webkit-text-stroke-color: var(--primary);
-	  -moz-text-stroke-color: var(--primary);
+    -moz-text-stroke-color: var(--primary);
   
     color: transparent;
 
@@ -56,18 +57,17 @@ const ThumbTitle = styled.div`
       position: absolute;
       -webkit-text-stroke-width: 0px;
       -moz-text-stroke-width: 0px;
-      font-size: 3rem;
-      letter-spacing: 2px;
+      font-size: 2rem;
+      letter-spacing: 3px;
       line-height: 2.8rem;
       left: calc(50% + 4px);
       top: calc(50% + 4px);
       content: "${props => props.content}";
       z-index: -1;
-      position: absolute;
       transform: translate(-50%, -50%);
 
-      background-color: var(--primary);
-      opacity: 0.3;
+      background-color: var(--background);
+      // opacity: 0.3;
 
       -webkit-background-clip: text;
       -moz-background-clip: text;
@@ -82,7 +82,7 @@ const ThumbTitle = styled.div`
 const ProjectThumb = ({ patternData, children }) => {
   const thumbRef = useRef();
   const [{ top }, set] = useSpring(() => ({ top: 0 }));
-  const [range, setRange] = useState([-200, 160, 600]);
+  const [range, setRange] = useState([-200, 600]);
 
   const onScroll = useCallback(() => {
     set({ top: thumbRef.current.getBoundingClientRect().top });
@@ -100,11 +100,7 @@ const ProjectThumb = ({ patternData, children }) => {
   useEffect(() => {
     if (thumbRef.current !== undefined) {
       let height = thumbRef.current.getBoundingClientRect().height;
-      setRange([
-        0 - height / 2,
-        window.innerHeight / 2 - 10,
-        window.innerHeight
-      ]);
+      setRange([0 - height / 2, window.innerHeight]);
       set({ top: thumbRef.current.getBoundingClientRect().top });
     }
   }, [thumbRef, set]);
