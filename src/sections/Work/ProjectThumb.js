@@ -7,7 +7,6 @@ import Patterns from "../../components/UI/Patterns/Patterns";
 const Container = styled.div`
   position: relative;
   height: 250px;
-  margin: 20px 0;
   background: ${props =>
     props.backgroundColor ? props.backgroundColor : "none"};
 `;

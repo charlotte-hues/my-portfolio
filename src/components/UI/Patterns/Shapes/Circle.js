@@ -16,15 +16,9 @@ const Circle = ({
   stripes,
   uid
 }) => {
-  const interpSize = interp({ animatedValue: animatedValue, value: width });
-  const interpX = interp({
-    animatedValue: animatedValue,
-    value: x
-  }).interpolate(x => `${x}%`);
-  const interpY = interp({
-    animatedValue: animatedValue,
-    value: y
-  }).interpolate(x => `${x}%`);
+  const interpSize = interp(animatedValue, width);
+  const interpX = interp(animatedValue, x).interpolate(x => `${x}%`);
+  const interpY = interp(animatedValue, y).interpolate(x => `${x}%`);
 
   return (
     <animated.div style={{ position: "absolute", left: interpX, top: interpY }}>

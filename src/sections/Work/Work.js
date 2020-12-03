@@ -18,29 +18,33 @@ const Container = styled.div`
   margin: 10px 0;
 `;
 
+const StyledLink = styled(Link)`
+  margin: 20px 0;
+`;
+
 const Circle1 = {
   component: "Circle",
   layer: "0",
-  color: "var(--primary)",
+  color: "var(--background)",
   texture: true,
   stripes: {
     invert: true,
     rotation: 45
   },
   width: {
-    main: 150,
-    start: 2,
-    end: 40
+    start: 40,
+    mid: 150,
+    end: 2
   },
   x: {
-    main: 50,
-    start: 0,
-    end: 100
+    start: 100,
+    mid: 50,
+    end: 0
   },
   y: {
-    main: 50,
-    start: 100,
-    end: 0
+    start: 0,
+    mid: 50,
+    end: 100
   }
 };
 
@@ -49,28 +53,28 @@ const Circle2 = {
   layer: "0",
   color: "var(--background4)",
   texture: true,
-  stripes: false,
+  stripes: true,
   width: {
-    main: 100,
     start: 200,
+    mid: 100,
     end: 200
   },
   x: {
-    main: 40,
     start: 2,
+    mid: 40,
     end: 2
   },
   y: {
-    main: 20,
-    start: 70,
-    end: 0
+    start: 0,
+    mid: 20,
+    end: 70
   }
 };
 
 const Work = props => {
   let links = allWork.map(project => {
     return props.homepage && project.homepage ? null : (
-      <Link key={project.pathName} to={"/work/" + project.pathName}>
+      <StyledLink key={project.pathName} to={"/work/" + project.pathName}>
         <ProjectThumb
           patternData={{
             background: "var(--background2)",
@@ -88,7 +92,7 @@ const Work = props => {
         >
           {project.title}
         </ProjectThumb>
-      </Link>
+      </StyledLink>
     );
   });
 
@@ -99,7 +103,7 @@ const Work = props => {
       <Container>
         {links}
         {props.homepage && (
-          <Link to="/work">
+          <StyledLink to="/work">
             <ProjectThumb
               patternData={{
                 background: "var(--background2)",
@@ -113,7 +117,7 @@ const Work = props => {
             >
               View all projects
             </ProjectThumb>
-          </Link>
+          </StyledLink>
         )}
       </Container>
       {ContactFooter}

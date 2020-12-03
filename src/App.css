@@ -1,10 +1,20 @@
-:root {
+/* :root {
   --white: #fff;
   --background: #f9c4c4;
   --background2: #e7b3be;
   --background3: #daabbc;
   --background4: #c9a3b9;
   --primary: #074fa9;
+} */
+
+:root {
+  --white: #fff;
+  --background: #2b2b2b;
+  --background2: #353535;
+  --background3: #454545;
+  --background4: #5b5b5b;
+  --background5: #7d7d7d;
+  --primary: #e3e3e3;
 }
 
 * {
@@ -30,6 +40,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: "var(--primary)";
 }
 
 .canvas {
