@@ -29,7 +29,7 @@ const ThumbTitle = styled.div`
     left: 0;
     width: 160px;
     height: 160px;
-    background: var(--background2);
+    background: var(--background);
     border-radius: 100%;
     content: "";
   }
@@ -66,7 +66,7 @@ const ThumbTitle = styled.div`
       z-index: -1;
       transform: translate(-50%, -50%);
 
-      background-color: var(--background);
+      background-color: var(--background2);
       // opacity: 0.3;
 
       -webkit-background-clip: text;
@@ -79,7 +79,7 @@ const ThumbTitle = styled.div`
   }
 `;
 
-const ProjectThumb = ({ patternData, children }) => {
+const ProjectThumb = ({ pattern, background, children }) => {
   const thumbRef = useRef();
   const [{ top }, set] = useSpring(() => ({ top: 0 }));
   const [range, setRange] = useState([-200, 600]);
@@ -106,9 +106,9 @@ const ProjectThumb = ({ patternData, children }) => {
   }, [thumbRef, set]);
 
   return (
-    <Container backgroundColor={patternData.background} ref={thumbRef}>
+    <Container backgroundColor={background} ref={thumbRef}>
       <Patterns
-        patternData={patternData.shapes}
+        patternData={pattern}
         animatedValue={{ value: top, range: range }}
       />
       <ThumbTitle content={children}>

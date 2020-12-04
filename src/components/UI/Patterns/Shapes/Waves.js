@@ -1,7 +1,7 @@
 import React from "react";
 import { animated } from "react-spring";
 
-import { Stripes, Gradient, GrainyTexture } from "./Defs";
+import { Stripes, Gradient, Texture } from "./Defs";
 import ConditionalWrapper from "../../../../hoc/Utility/ConditionalWrapper";
 import { clampedInterpolation as interp } from "../../Animations/clampedInterpolation";
 
@@ -24,6 +24,7 @@ const Waves = ({
   ];
 
   const interpWaves1 = interp(animatedValue, wavePath1);
+
   return (
     <div
       style={{
@@ -47,18 +48,10 @@ const Waves = ({
         width="100%"
         height="100%"
       >
-        {texture && (
-          <defs>
-            <GrainyTexture />
-          </defs>
-        )}
-        {stripes && (
-          <defs>
-            <Stripes id={uid} {...stripes} />
-          </defs>
-        )}
         <defs>
           <Gradient />
+          {texture && <Texture id={uid} style={texture} />}
+          {stripes && <Stripes id={uid} {...stripes} />}
           <mask
             id="waveMask"
             maskUnits="userSpaceOnUse"
@@ -78,9 +71,10 @@ const Waves = ({
             </ConditionalWrapper>
           </mask>
         </defs>
+
         <g mask="url(#waveMask)">
           <rect
-            mask={texture && "url(#grainy)"}
+            mask={texture && `url(#${uid}texture)`}
             fill={color ? color : "var(--primary)"}
             width="100%"
             height="100%"

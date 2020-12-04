@@ -1,7 +1,7 @@
 import React from "react";
 import { animated } from "react-spring";
 
-import { Stripes, GrainyTexture } from "./Defs";
+import { Stripes, Texture } from "./Defs";
 import ConditionalWrapper from "../../../../hoc/Utility/ConditionalWrapper";
 import { clampedInterpolation as interp } from "../../Animations/clampedInterpolation";
 
@@ -44,16 +44,14 @@ const Circle = ({
         height={interpSize}
         z-index={layer}
       >
-        {texture && (
-          <defs>
-            <GrainyTexture />
-          </defs>
-        )}
-        {stripes && (
-          <defs>
-            <Stripes id={uid} {...stripes} />
-          </defs>
-        )}
+        <ConditionalWrapper
+          wrapper={children => <defs>{children}</defs>}
+          condition={stripes || texture}
+        >
+          {texture && <Texture id={uid} style={texture} />}
+          {stripes && <Stripes id={uid} {...stripes} />}
+        </ConditionalWrapper>
+
         <ConditionalWrapper
           wrapper={children => (
             <g mask={`url(#${uid}StripeMask)`}>{children}</g>
@@ -65,7 +63,7 @@ const Circle = ({
             cy="140"
             r="140"
             fill={color ? interpColor : "var(--primary)"}
-            mask={texture && "url(#grainy)"}
+            mask={texture && `url(#${uid}texture)`}
           />
         </ConditionalWrapper>
       </animated.svg>

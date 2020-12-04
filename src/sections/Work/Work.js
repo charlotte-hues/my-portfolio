@@ -21,17 +21,23 @@ const Container = styled.div`
 const StyledLink = styled(Link)`
   margin: 20px 0;
   overflow: hidden;
+  background: var(--background2);
+
+  &:after {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: var(--background2);
+  }
 `;
 
 const Circle1 = {
   component: "Circle",
-  layer: "0",
+  layer: "1",
   color: "var(--primary)",
-  texture: true,
-  // stripes: {
-  //   invert: true,
-  //   rotation: 45
-  // },
+  texture: 2,
   width: 150,
   x: [100, 50, 0],
   y: [0, 50, 100],
@@ -42,7 +48,7 @@ const Waves = {
   component: "Waves",
   layer: "0",
   color: "var(--primary)",
-  texture: true,
+  texture: 3,
   stripes: true,
   width: "100%",
   height: "100%",
@@ -55,19 +61,17 @@ const Work = props => {
     return props.homepage && project.homepage ? null : (
       <StyledLink key={project.pathName} to={"/work/" + project.pathName}>
         <ProjectThumb
-          patternData={{
-            background: "var(--background2)",
-            shapes: [
-              {
-                ...Circle1,
-                uid: `${project.pathName}Circle1`
-              },
-              {
-                ...Waves,
-                uid: `${project.pathName}Waves`
-              }
-            ]
-          }}
+          background="var(--background)"
+          pattern={[
+            {
+              ...Circle1,
+              uid: `${project.pathName}Circle1`
+            },
+            {
+              ...Waves,
+              uid: `${project.pathName}Waves`
+            }
+          ]}
         >
           {project.title}
         </ProjectThumb>
@@ -84,15 +88,13 @@ const Work = props => {
         {props.homepage && (
           <StyledLink to="/work">
             <ProjectThumb
-              patternData={{
-                background: "var(--background2)",
-                shapes: [
-                  {
-                    ...Circle1,
-                    uid: `viewallCircle1`
-                  }
-                ]
-              }}
+              background="var(--background2)"
+              pattern={[
+                {
+                  ...Circle1,
+                  uid: `viewallCircle1`
+                }
+              ]}
             >
               View all projects
             </ProjectThumb>
