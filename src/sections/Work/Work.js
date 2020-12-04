@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import allWork from "./allWork";
@@ -18,21 +17,6 @@ const Container = styled.div`
   margin: 10px 0;
 `;
 
-const StyledLink = styled(Link)`
-  margin: 20px 0;
-  overflow: hidden;
-  background: var(--background2);
-
-  &:after {
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    background: var(--background2);
-  }
-`;
-
 const Circle1 = {
   component: "Circle",
   layer: "1",
@@ -42,6 +26,29 @@ const Circle1 = {
   x: [100, 50, 0],
   y: [0, 50, 100],
   opacity: [0, 0.5, 0]
+};
+
+const Circle2 = {
+  component: "Circle",
+  layer: "1",
+  color: "var(--primary)",
+  stripes: true,
+  texture: 1,
+  width: [50, 150, 60],
+  x: [0, 50, 0],
+  y: [0, 50, 100],
+  opacity: [0, 0.5, 0]
+};
+
+const Circle3 = {
+  component: "Circle",
+  layer: "3",
+  color: "var(--background3)",
+  texture: 3,
+  width: "100%",
+  x: 30,
+  y: 0,
+  opacity: 1
 };
 
 const Waves = {
@@ -56,49 +63,63 @@ const Waves = {
   y: [0, 0, 0]
 };
 
-const Work = props => {
+const Work = ({ homepage }) => {
+  useEffect(() => {
+    if (!homepage) {
+      const main = document.getElementById("MainContent");
+      main.scrollTo(0, 0);
+    }
+  }, [homepage]);
+
   let links = allWork.map(project => {
-    return props.homepage && project.homepage ? null : (
-      <StyledLink key={project.pathName} to={"/work/" + project.pathName}>
-        <ProjectThumb
-          background="var(--background)"
-          pattern={[
-            {
-              ...Circle1,
-              uid: `${project.pathName}Circle1`
-            },
-            {
-              ...Waves,
-              uid: `${project.pathName}Waves`
-            }
-          ]}
-        >
-          {project.title}
-        </ProjectThumb>
-      </StyledLink>
+    return homepage && project.homepage ? null : (
+      <ProjectThumb
+        link={"/work/" + project.pathName}
+        key={project.pathName}
+        background="var(--background)"
+        pattern={[
+          {
+            ...Circle1,
+            uid: `${project.pathName}Circle1`
+          },
+          {
+            ...Circle2,
+            uid: `${project.pathName}Circle2`
+          },
+          {
+            ...Circle3,
+            uid: `${project.pathName}Circle3`
+          },
+          {
+            ...Waves,
+            uid: `${project.pathName}Waves`
+          }
+        ]}
+      >
+        {project.title}
+      </ProjectThumb>
     );
   });
 
-  const ContactFooter = !props.homepage ? <Contact /> : null;
+  const ContactFooter = !homepage ? <Contact /> : null;
 
   return (
     <>
       <Container>
         {links}
-        {props.homepage && (
-          <StyledLink to="/work">
-            <ProjectThumb
-              background="var(--background2)"
-              pattern={[
-                {
-                  ...Circle1,
-                  uid: `viewallCircle1`
-                }
-              ]}
-            >
-              View all projects
-            </ProjectThumb>
-          </StyledLink>
+        {homepage && (
+          <ProjectThumb
+            link={"/work"}
+            background="var(--background2)"
+            pattern={[
+              {
+                ...Circle1,
+                uid: `viewallCircle1`
+              }
+            ]}
+          >
+            View all projects
+          </ProjectThumb>
         )}
       </Container>
       {ContactFooter}

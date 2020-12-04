@@ -1,8 +1,15 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSpring } from "react-spring";
 
 import Patterns from "../../components/UI/Patterns/Patterns";
+// import { clampedInterpolation as interp } from "../../components/UI/Animations/clampedInterpolation";
+
+const StyledLink = styled(Link)`
+  margin: 20px 0;
+  overflow: hidden;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -20,8 +27,7 @@ const ThumbTitle = styled.div`
   color: var(--background4);
   justify-text: top;
   text-align: left;
-  margin: 20px;  
-  // z-index: 100;
+  margin: 20px;
 
   &:after {
     position: absolute;
@@ -66,7 +72,7 @@ const ThumbTitle = styled.div`
       z-index: -1;
       transform: translate(-50%, -50%);
 
-      background-color: var(--background2);
+      background-color: var(--background3);
       // opacity: 0.3;
 
       -webkit-background-clip: text;
@@ -79,13 +85,14 @@ const ThumbTitle = styled.div`
   }
 `;
 
-const ProjectThumb = ({ pattern, background, children }) => {
+const ProjectThumb = ({ pattern, background, link, children }) => {
   const thumbRef = useRef();
   const [{ top }, set] = useSpring(() => ({ top: 0 }));
   const [range, setRange] = useState([-200, 600]);
 
   const onScroll = useCallback(() => {
-    set({ top: thumbRef.current.getBoundingClientRect().top });
+    thumbRef.current !== undefined &&
+      set({ top: thumbRef.current.getBoundingClientRect().top });
   }, [set]);
 
   useEffect(() => {
@@ -106,15 +113,17 @@ const ProjectThumb = ({ pattern, background, children }) => {
   }, [thumbRef, set]);
 
   return (
-    <Container backgroundColor={background} ref={thumbRef}>
-      <Patterns
-        patternData={pattern}
-        animatedValue={{ value: top, range: range }}
-      />
-      <ThumbTitle content={children}>
-        <h3>{children}</h3>
-      </ThumbTitle>
-    </Container>
+    <StyledLink to={link}>
+      <Container backgroundColor={background} ref={thumbRef}>
+        <Patterns
+          patternData={pattern}
+          animatedValue={{ value: top, range: range }}
+        />
+        <ThumbTitle content={children}>
+          <h3>{children}</h3>
+        </ThumbTitle>
+      </Container>
+    </StyledLink>
   );
 };
 
