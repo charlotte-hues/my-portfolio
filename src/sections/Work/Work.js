@@ -51,6 +51,16 @@ const Circle3 = {
   opacity: 1
 };
 
+const Circle4 = {
+  component: "Circle",
+  layer: "4",
+  color: "var(--background)",
+  width: "160px",
+  x: 30,
+  y: 20,
+  opacity: 1
+};
+
 const Waves = {
   component: "Waves",
   layer: "0",
@@ -93,6 +103,10 @@ const Work = ({ homepage }) => {
           {
             ...Waves,
             uid: `${project.pathName}Waves`
+          },
+          {
+            ...Circle4,
+            uid: `${project.pathName}Circle4`
           }
         ]}
       >
