@@ -91,8 +91,13 @@ const ProjectThumb = ({ pattern, background, link, children }) => {
   const [range, setRange] = useState([-200, 600]);
 
   const onScroll = useCallback(() => {
-    thumbRef.current !== undefined &&
+    if (
+      thumbRef.current !== undefined &&
+      thumbRef.current.getBoundingClientRect().top >= range[0] &&
+      thumbRef.current.getBoundingClientRect().top <= range[1]
+    ) {
       set({ top: thumbRef.current.getBoundingClientRect().top });
+    }
   }, [set]);
 
   useEffect(() => {

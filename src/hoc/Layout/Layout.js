@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useSpring } from "react-spring";
 
 import Toolbar from "./Toolbar/Toolbar";
 import SideMenu from "./SideMenu/SideMenu";
@@ -14,6 +15,7 @@ const StyledMain = styled.main`
 
 const Layout = props => {
   const [sideMenuIsVisible, setSideMenuIsVisible] = useState(false);
+  const [{ scrollTop }, set] = useSpring(() => ({ scrollTop: 0 }));
 
   const openMenu = () => {
     setSideMenuIsVisible(true);
@@ -23,11 +25,17 @@ const Layout = props => {
     setSideMenuIsVisible(false);
   };
 
+  const onScroll = e => {
+    set(e.target.scrollTop);
+  };
+
   return (
     <>
       <Toolbar openMenu={openMenu} />
       <SideMenu isOpen={sideMenuIsVisible} close={closeMenu} />
-      <StyledMain id="MainContent">{props.children}</StyledMain>
+      <StyledMain id="MainContent" onScroll={e => onScroll(e)}>
+        {props.children}
+      </StyledMain>
     </>
   );
 };
