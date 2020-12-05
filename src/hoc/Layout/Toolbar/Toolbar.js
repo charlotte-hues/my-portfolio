@@ -32,13 +32,13 @@ const Home = styled.div`
 const AnimatedHome = animated(Home);
 
 const Toolbar = React.memo(({ scrollTop, openMenu }) => {
-  const opacity = [1, 0];
   const animatedValue = {
     value: scrollTop,
     range: [0, 80]
   };
-  const text = [0, 100];
 
+  // const text = [0, 100];
+  // const opacity = [1, 0];
   // const interpOpacity = interp(animatedValue, opacity);
   // const interpText = interp(animatedValue, text, x => x.toFixed());
   const interpWidth = interp(animatedValue, [200, 0], x => `${x}px`);
