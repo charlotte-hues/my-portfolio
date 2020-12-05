@@ -20,11 +20,7 @@ const App = () => {
     </Switch>
   );
 
-  return (
-    <>
-      <Layout>{routes}</Layout>
-    </>
-  );
+  return <Layout>{routes}</Layout>;
 };
 
 export default withRouter(App);

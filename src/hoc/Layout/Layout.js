@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { useSpring } from "react-spring";
 
@@ -15,23 +15,26 @@ const StyledMain = styled.main`
 
 const Layout = props => {
   const [sideMenuIsVisible, setSideMenuIsVisible] = useState(false);
-  const [{ scrollTop }, set] = useSpring(() => ({ scrollTop: 0 }));
+  const [{ scrollTop }, setSpring] = useSpring(() => ({ scrollTop: 0 }));
 
-  const openMenu = () => {
+  const openMenu = useCallback(() => {
     setSideMenuIsVisible(true);
-  };
+  }, [setSideMenuIsVisible]);
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setSideMenuIsVisible(false);
-  };
+  }, [setSideMenuIsVisible]);
 
-  const onScroll = e => {
-    set(e.target.scrollTop);
-  };
+  const onScroll = useCallback(
+    e => {
+      setSpring({ scrollTop: e.target.scrollTop });
+    },
+    [setSpring]
+  );
 
   return (
     <>
-      <Toolbar openMenu={openMenu} />
+      <Toolbar scrollTop={scrollTop} openMenu={openMenu} />
       <SideMenu isOpen={sideMenuIsVisible} close={closeMenu} />
       <StyledMain id="MainContent" onScroll={e => onScroll(e)}>
         {props.children}

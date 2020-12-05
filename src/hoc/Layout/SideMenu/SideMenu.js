@@ -15,19 +15,19 @@ const StyledMenu = styled.div`
   padding: 20% 20%;
 `;
 
-const SideMenu = props => {
+const SideMenu = ({ isOpen, close }) => {
   return (
     <>
       <AnimatePresence>
-        {props.isOpen && (
+        {isOpen && (
           <motion.div
-            key={props.isOpen}
+            key={isOpen}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <StyledMenu onClick={() => props.close()} />
-            <NavigationItems close={props.close} />
+            <StyledMenu onClick={() => close()} />
+            <NavigationItems close={close} />
           </motion.div>
         )}
       </AnimatePresence>
