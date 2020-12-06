@@ -4,9 +4,7 @@ import styled from "styled-components";
 import { animated, useSpring } from "react-spring";
 
 import Patterns from "../../components/UI/Patterns/Patterns";
-import useEventListener from "../../hooks/useEventListener";
-import useScrollPosition from "../../hooks/useScrollPosition";
-import checkElementIsInRange from "../../hoc/Utility/checkElementIsInRange";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { clampedInterpolation as interp } from "../../components/UI/Animations/clampedInterpolation";
 
 const StyledLink = styled(Link)`
@@ -73,8 +71,6 @@ color: transparent;
 }
 `;
 
-const AnimatedTitle = animated(StyledH3);
-
 const ProjectThumb = ({ pattern, background, link, children }) => {
   const thumbRef = useRef();
   const [{ top }, setSpring] = useSpring(() => ({ top: 0 }));
@@ -88,23 +84,28 @@ const ProjectThumb = ({ pattern, background, link, children }) => {
     }
   }, [thumbRef, setSpring]);
 
-  const onScroll = useCallback(() => {
-    checkElementIsInRange(thumbRef, range) &&
-      setSpring({ top: thumbRef.current.getBoundingClientRect().top });
-  }, [thumbRef, setSpring, range]);
+  let isInView = true;
 
-  useEventListener("scroll", onScroll);
-
-  const interpOpacity = interp(animatedValue, [0.5, 1, 1, 0]);
+  useScrollPosition(
+    ({ currPos }) => {
+      setSpring({ top: currPos.y });
+      const isShow = currPos.y >= range[0] && currPos.y <= range[1];
+      if (isShow != isInView) {
+        isInView = isShow;
+      }
+    },
+    [isInView],
+    thumbRef,
+    false,
+    300
+  );
 
   return (
     <StyledLink to={link} ref={thumbRef}>
       <Container backgroundColor={background}>
         <Patterns patternData={pattern} animatedValue={animatedValue} />
         <ThumbTitle>
-          <AnimatedTitle content={children} style={{ opacity: interpOpacity }}>
-            {children}
-          </AnimatedTitle>
+          <StyledH3 content={children}>{children}</StyledH3>
         </ThumbTitle>
       </Container>
     </StyledLink>

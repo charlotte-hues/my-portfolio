@@ -8,6 +8,10 @@ const importShape = shapeName =>
 const Patterns = ({ patternData, animatedValue }) => {
   const [shapes, setShapes] = useState([]);
 
+  const { value, range } = animatedValue;
+
+  useEffect(() => console.log(value), [value]);
+
   useEffect(() => {
     async function loadShapes() {
       const shapePromises = patternData.map(async shape => {
