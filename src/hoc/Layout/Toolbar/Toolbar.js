@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { animated } from "react-spring";
 
 import Menu from "../../../components/UI/Icons/Menu/Menu";
-import { clampedInterpolation as interp } from "../../../components/UI/Animations/clampedInterpolation";
+import { useScrollPosition } from "../../../hooks/useScrollPosition";
 
 const Header = styled.header`
-  position: absolute;
-  top: 0;
+  position: fixed;  
   height: 108px;
   width: 100%;
   padding: 20px 20px;
@@ -16,6 +14,9 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  top: ${props => (props.show ? "0" : "-110px")};
+  // opacity: ${props => (props.show ? "1" : "0")};
+  transition: all 0.3s ease;
 `;
 
 const Home = styled.div`
@@ -29,26 +30,24 @@ const Home = styled.div`
   white-space: nowrap;
 `;
 
-const AnimatedHome = animated(Home);
+const Toolbar = React.memo(({ openMenu }) => {
+  const [hideOnScroll, setHideOnScroll] = useState(true);
 
-const Toolbar = React.memo(({ scrollTop, openMenu }) => {
-  const animatedValue = {
-    value: scrollTop,
-    range: [0, 80]
-  };
-
-  // const opacity = [1, 0];
-  // const text = [0, 100];
-  // const interpOpacity = interp(animatedValue, opacity);
-  // const interpText = interp(animatedValue, text, x => x.toFixed());
-  const interpWidth = interp(animatedValue, [200, 0], x => `${x}px`);
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isShow = currPos.y > prevPos.y;
+      if (isShow !== hideOnScroll) setHideOnScroll(isShow);
+    },
+    [hideOnScroll],
+    false,
+    false,
+    300
+  );
 
   return (
-    <Header>
+    <Header show={hideOnScroll}>
       <Link to="/">
-        <AnimatedHome style={{ width: interpWidth }}>
-          CHARLOTTE HUES
-        </AnimatedHome>
+        <Home>CHARLOTTE HUES</Home>
       </Link>
       <Menu onClick={openMenu} color={"var(--primary)"} />
     </Header>

@@ -5,6 +5,7 @@ import { animated, useSpring } from "react-spring";
 
 import Patterns from "../../components/UI/Patterns/Patterns";
 import useEventListener from "../../hooks/useEventListener";
+import useScrollPosition from "../../hooks/useScrollPosition";
 import checkElementIsInRange from "../../hoc/Utility/checkElementIsInRange";
 import { clampedInterpolation as interp } from "../../components/UI/Animations/clampedInterpolation";
 
@@ -92,8 +93,7 @@ const ProjectThumb = ({ pattern, background, link, children }) => {
       setSpring({ top: thumbRef.current.getBoundingClientRect().top });
   }, [thumbRef, setSpring, range]);
 
-  const main = document.getElementById("MainContent");
-  useEventListener("scroll", onScroll, main);
+  useEventListener("scroll", onScroll);
 
   const interpOpacity = interp(animatedValue, [0.5, 1, 1, 0]);
 
